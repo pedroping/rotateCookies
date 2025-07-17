@@ -1,0 +1,39 @@
+<html>
+
+<body>
+  <h1>site 1</h1>
+  <br />
+  <span id="token"></span>
+  <iframe id='commonSite' src='http://localhost:9093/commonSite.html' style='display: none;'></iframe>
+
+  <script>
+    (function () {
+      const frame = document.querySelector('#commonSite');
+      const commonSite = frame.contentWindow;
+      const commonOrigin = 'http://localhost:9093';
+      const tokenSpan = document.querySelector("#token");
+
+      window.addEventListener(
+        "message",
+        (event) => {
+          if (event.data.wappalyzer) return;
+
+          if (!event.data) return window.location.href = 'http://localhost:9092';
+
+          tokenSpan.innerText = event.data;
+        },
+        false,
+      );
+
+
+      frame.onload = () => {
+        console.log('Load');
+        commonSite.postMessage({
+          action: 'get'
+        }, commonOrigin);
+      }
+    })();
+  </script>
+</body>
+
+</html>

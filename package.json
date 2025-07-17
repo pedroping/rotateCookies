@@ -1,0 +1,11 @@
+{
+  "name": "rotatecookies",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx concurrently \"npx http-server ./a --port 9091\" \"npx http-server ./b --port 9092\" \"npx http-server ./c --port 9093\""
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

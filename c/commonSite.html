@@ -1,0 +1,41 @@
+<html>
+
+<body>
+  <script>
+    (function () {
+      const origins = [
+        'http://localhost:9091',
+        'http://localhost:9092'
+      ]
+
+      window.addEventListener('message', function (event) {
+        const origin = event.origin;
+        const data = event.data;
+
+        if (data.action == 'set') {
+          localStorage.setItem('token', data.token)
+
+          if (data.token)
+            event.source.postMessage(
+              'ok',
+              origin,
+            );
+
+          return;
+        }
+
+        if (data.action == 'get') {
+          console.log('here');
+
+          event.source.postMessage(
+            localStorage.getItem('token'),
+            origin,
+          );
+          return;
+        }
+      }, false);
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<html>
+
+<body>
+  <h1>site 2</h1>
+  <br />
+  <input type="text" id="token">
+  <button id="set">Set</button>
+  <button id="clear">Clear</button>
+  <iframe id='commonSite' src='http://localhost:9093/commonSite.html' style='display: none;'></iframe>
+
+  <script>
+    (function () {
+      const commonSite = document.querySelector('#commonSite').contentWindow;
+      const tokenInput = document.querySelector("#token");
+      const setBtn = document.querySelector("#set");
+      const clearBtn = document.querySelector("#clear");
+      const commonOrigin = 'http://localhost:9093';
+
+      clearBtn.addEventListener('click', () => {
+        commonSite.postMessage({
+          action: 'set',
+          token: ''
+        }, commonOrigin);
+      })
+
+
+      setBtn.addEventListener('click', () => {
+        if (!tokenInput.value) return;
+
+        commonSite.postMessage({
+          action: 'set',
+          token: tokenInput.value
+        }, commonOrigin);
+      })
+
+      window.addEventListener(
+        "message",
+        (event) => {
+          if (event.data.wappalyzer) return;
+          if (event.data === 'ok') window.location.href = 'http://localhost:9091'
+        },
+        false,
+      );
+
+
+
+    })();
+  </script>
+</body>
+
+</html>
