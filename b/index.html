@@ -16,6 +16,8 @@
       const clearBtn = document.querySelector("#clear");
       const commonOrigin = 'http://localhost:9093';
 
+      const lastUrl = new URLSearchParams(window.location.search).get('url');
+
       clearBtn.addEventListener('click', () => {
         commonSite.postMessage({
           action: 'set',
@@ -37,7 +39,7 @@
         "message",
         (event) => {
           if (event.data.wappalyzer) return;
-          if (event.data === 'ok') window.location.href = 'http://localhost:9091'
+          if (event.data === 'ok') window.location.href = lastUrl || 'http://localhost:9091'
         },
         false,
       );

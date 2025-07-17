@@ -16,9 +16,9 @@
       window.addEventListener(
         "message",
         (event) => {
-          if (event.data.wappalyzer) return;
+          if (!event.data) return window.location.href = 'http://localhost:9092?url=' + window.location.href;
 
-          if (!event.data) return window.location.href = 'http://localhost:9092';
+          if (typeof event.data == 'object' && event.data.wappalyzer) return;
 
           tokenSpan.innerText = event.data;
         },
