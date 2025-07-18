@@ -14,6 +14,7 @@
 
         if (data.action == 'set') {
           localStorage.setItem('token', data.token)
+          document.cookie = `myToken=${data.token}; Secure;`
 
           if (data.token)
             event.source.postMessage(

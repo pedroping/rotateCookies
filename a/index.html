@@ -7,11 +7,35 @@
   <iframe id='commonSite' src='http://localhost:9093/commonSite.html' style='display: none;'></iframe>
 
   <script>
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
     (function () {
       const frame = document.querySelector('#commonSite');
       const commonSite = frame.contentWindow;
       const commonOrigin = 'http://localhost:9093';
       const tokenSpan = document.querySelector("#token");
+
+
+      const cookie = getCookie("myToken");
+
+      if (!cookie) {
+        window.location.href = 'http://localhost:9092?url=' + window.location.href;
+        return;
+      }
 
       window.addEventListener(
         "message",
@@ -27,7 +51,6 @@
 
 
       frame.onload = () => {
-        console.log('Load');
         commonSite.postMessage({
           action: 'get'
         }, commonOrigin);
