@@ -3,18 +3,13 @@
 <body>
   <script>
     (function () {
-      const origins = [
-        'http://localhost:9091',
-        'http://localhost:9092'
-      ]
-
       window.addEventListener('message', function (event) {
         const origin = event.origin;
         const data = event.data;
 
         if (data.action == 'set') {
           localStorage.setItem('token', data.token)
-          document.cookie = `myToken=${data.token}; Secure;`
+          document.cookie = `myToken=${data.token}; Secure; expires=` + new Date(Date.now() + 3600 * 1000).toUTCString() + "; path=/";
 
           if (data.token)
             event.source.postMessage(
@@ -27,7 +22,11 @@
 
         if (data.action == 'get') {
           event.source.postMessage(
-            localStorage.getItem('token'),
+            {
+              type: 'token',
+              token: localStorage.getItem('token'),
+              invalid: !localStorage.getItem('token')
+            },
             origin,
           );
           return;
