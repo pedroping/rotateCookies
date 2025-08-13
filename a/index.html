@@ -4,7 +4,7 @@
   <h1>site 1</h1>
   <br />
   <span id="token"></span>
-  <iframe id='commonSite' src='http://localhost:9093/commonSite.html' style='display: none;'></iframe>
+  <iframe id='commonSite' src='https://rotatecookies.onrender.com/c/commonSite.html' style='display: none;'></iframe>
 
   <script>
     function getCookie(cname) {
@@ -26,30 +26,29 @@
     (function () {
       const frame = document.querySelector('#commonSite');
       const commonSite = frame.contentWindow;
-      const commonOrigin = 'http://localhost:9093';
+      const commonOrigin = 'https://rotatecookies.onrender.com';
       const tokenSpan = document.querySelector("#token");
 
 
       const cookie = getCookie("myToken");
 
-      if (!cookie) {
-        alert('No cookie')
-        // window.location.href = 'http://localhost:9092?url=' + window.location.href;
+      if (cookie) {
+        tokenSpan.innerText = cookie;
+        return;
       }
+
 
       window.addEventListener(
         "message",
         (event) => {
-          console.log(event.data);
+          if (event?.data?.type != 'token') return;
 
-          if (!event.data) {
-            if (confirm('Redirect ?'))
+          if (event.data.invalid) {
+            if (confirm('Invalid token. Go to the login page?'))
               return window.location.href = 'http://localhost:9092?url=' + window.location.href
-          };
+          }
 
-          if (typeof event.data == 'object' && event.data.wappalyzer) return;
-
-          tokenSpan.innerText = event.data;
+          tokenSpan.innerText = event.data.token;
         },
         false,
       );

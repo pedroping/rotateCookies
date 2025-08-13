@@ -2,11 +2,18 @@
 
 <body>
   <h1>site 2</h1>
-  <br />
+
+  <div>
+    <span>Current</span>
+    <span id="token"></span>
+  </div>
+
+  <br>
+
   <input type="text" id="token">
   <button id="set">Set</button>
   <button id="clear">Clear</button>
-  <iframe id='commonSite' src='http://localhost:9093/commonSite.html' style='display: none;'></iframe>
+  <iframe id='commonSite' src='https://rotatecookies.onrender.com/c/commonSite.html' style='display: none;'></iframe>
 
   <script>
     (function () {
@@ -14,7 +21,9 @@
       const tokenInput = document.querySelector("#token");
       const setBtn = document.querySelector("#set");
       const clearBtn = document.querySelector("#clear");
-      const commonOrigin = 'http://localhost:9093';
+      const commonOrigin = 'https://rotatecookies.onrender.com';
+      const frame = document.querySelector('#commonSite');
+      const tokenSpan = document.querySelector("#token");
 
       const lastUrl = new URLSearchParams(window.location.search).get('url');
 
@@ -38,14 +47,24 @@
       window.addEventListener(
         "message",
         (event) => {
+          if (event?.data?.type == 'token' && !event?.data?.invalid) {
+            tokenSpan.innerText = event.data.token;
+          }
+
           if (event.data.wappalyzer) return;
-          if (event.data === 'ok') window.location.href = lastUrl || 'http://localhost:9091'
+          if (event.data !== 'ok') return;
+
+          if (confirm('Token saved! Go to the main page?'))
+            window.location.href = lastUrl || 'https://pedroping.github.io/rotateCookies/a'
         },
         false,
       );
 
-
-
+      frame.onload = () => {
+        commonSite.postMessage({
+          action: 'get'
+        }, commonOrigin);
+      }
     })();
   </script>
 </body>
