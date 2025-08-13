@@ -4,7 +4,8 @@
   <h1>site 1</h1>
   <br />
   <span id="token"></span>
-  <iframe id='commonSite' src='https://rotatecookies.onrender.com/c/commonSite.html' style='display: none;'></iframe>
+  <iframe id='commonSite' src='https://pedroping.github.io/rotateCookies/c/commonSite.html'
+    style='display: none;'></iframe>
 
   <script>
     function getCookie(cname) {
@@ -26,7 +27,7 @@
     (function () {
       const frame = document.querySelector('#commonSite');
       const commonSite = frame.contentWindow;
-      const commonOrigin = 'https://rotatecookies.onrender.com';
+      const commonOrigin = 'https://pedroping.github.io';
       const tokenSpan = document.querySelector("#token");
 
 
@@ -44,8 +45,8 @@
           if (event?.data?.type != 'token') return;
 
           if (event.data.invalid) {
-            if (confirm('Invalid token. Go to the login page?'))
-              return window.location.href = 'http://localhost:9092?url=' + window.location.href
+            window.location.href = 'http://localhost:9092?url=' + window.location.href;
+            return
           }
 
           tokenSpan.innerText = event.data.token;

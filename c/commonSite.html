@@ -21,6 +21,8 @@
         }
 
         if (data.action == 'get') {
+          console.log(document.cookie);
+
           event.source.postMessage(
             {
               type: 'token',
