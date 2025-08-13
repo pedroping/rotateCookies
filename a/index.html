@@ -33,6 +33,7 @@
       const cookie = getCookie("myToken");
 
       if (!cookie) {
+        alert('No cookie')
         window.location.href = 'http://localhost:9092?url=' + window.location.href;
         return;
       }
@@ -60,3 +61,5 @@
 </body>
 
 </html>
+
+<!-- \"npx http-server ./a --port 9091\" -->
