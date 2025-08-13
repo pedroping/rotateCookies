@@ -50,17 +50,15 @@
         (event) => {
           if (event?.data?.type == 'token' && !event?.data?.invalid) {
             tokenSpan.innerText = event.data.token;
-
-            console.log('1')
-
-            if (lastUrl) window.location.href = lastUrl || 'https://rotatecookies.onrender.com/a'
+            commonSite.postMessage({
+              action: 'set',
+              token: event.data.token
+            }, commonOrigin);
+            return;
           }
 
           if (event.data.wappalyzer) return;
           if (event.data !== 'ok') return;
-
-          console.log('2')
-
 
           window.location.href = lastUrl || 'https://rotatecookies.onrender.com/a'
         },
