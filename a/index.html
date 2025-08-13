@@ -40,7 +40,8 @@
       window.addEventListener(
         "message",
         (event) => {
-          alert(JSON.parse(event.data))
+          console.log(event.data);
+
           if (!event.data) return window.location.href = 'http://localhost:9092?url=' + window.location.href;
 
           if (typeof event.data == 'object' && event.data.wappalyzer) return;
