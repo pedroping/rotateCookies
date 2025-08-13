@@ -9,7 +9,7 @@
 
         if (data.action == 'set') {
           localStorage.setItem('token', data.token)
-          document.cookie = `myToken=${data.token}; Secure; expires=` + new Date(Date.now() + 3600 * 1000).toUTCString() + "; path=/";
+          document.cookie = `myToken=${data.token}; expires=${new Date(Date.now() + 3600 * 1000).toUTCString()}; path=/; Secure; SameSite=None`;
 
           if (data.token)
             event.source.postMessage(
