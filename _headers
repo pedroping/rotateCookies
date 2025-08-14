@@ -1,0 +1,5 @@
+/c/commonSite.html
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-AbCdEfGhIjKlMnOpQrSt'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors https://rotatecookies.onrender.com https://wonderful-mooncake-705915.netlify.app; frame-src https://rotatecookies.onrender.com https://wonderful-mooncake-705915.netlify.app;
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
