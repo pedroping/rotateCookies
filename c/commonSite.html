@@ -1,4 +1,5 @@
 <html>
+
 <body>
   <script nonce="AbCdEfGhIjKlMnOpQrSt">
     function getCookie(cname) {
@@ -27,7 +28,7 @@
 
         if (data.action == 'set') {
           if (!data.token) {
-            document.cookie = `myToken=; SameSite=None; Secure; Domain=.pedroping.github.io; expires=${date.toUTCString()}; Path=/`;
+            document.cookie = `myToken=; SameSite=None; Secure; Domain=.wonderful-mooncake-705915.netlify.app; Path=/c/commonsite; expires=${date.toUTCString()}`;
             event.source.postMessage(
               {
                 type: 'token',
@@ -39,7 +40,7 @@
             return;
           }
 
-          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.pedroping.github.io; expires=${date.toUTCString()}; Path=/`;
+          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.wonderful-mooncake-705915.netlify.app; Path=/c/commonsite; expires=${date.toUTCString()}`;
           event.source.postMessage(
             'ok',
             origin,
