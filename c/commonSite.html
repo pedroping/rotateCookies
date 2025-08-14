@@ -23,9 +23,12 @@
         const origin = event.origin;
         const data = event.data;
 
+        const date = new Date();
+        date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+
         if (data.action == 'set') {
           if (!data.token) {
-            document.cookie = `myToken=; SameSite=None; Secure; Domain=.pedroping.github.io; Path=/`;
+            document.cookie = `myToken=; SameSite=None; Secure; Domain=.pedroping.github.io; expires=${date.toUTCString()}; Path=/`;
             event.source.postMessage(
               {
                 type: 'token',
@@ -37,7 +40,7 @@
             return;
           }
 
-          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.pedroping.github.io; Path=/`;
+          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.pedroping.github.io; expires=${date.toUTCString()}; Path=/`;
           event.source.postMessage(
             'ok',
             origin,
