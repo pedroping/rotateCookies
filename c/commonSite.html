@@ -19,9 +19,13 @@
     }
 
     (function () {
+      const acceptOrigins = ["https://rotatecookies.onrender.com", "https://pedroping.github.io"];
+
       window.addEventListener('message', function (event) {
         const origin = event.origin;
         const data = event.data;
+
+        if (!acceptOrigins.includes(origin)) return
 
         const date = new Date();
         date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
