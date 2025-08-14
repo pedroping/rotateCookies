@@ -5,12 +5,12 @@
   <br />
   <span id="token"></span>
   <button id="clearBtn">Clear</button>
-  <iframe id='commonSite' src='https://pedroping.github.io/rotateCookies/c/commonSite.html'
+  <iframe id='commonSite' src='https://wonderful-mooncake-705915.netlify.app/c/commonsite'
     style='display: none;'></iframe>
 
   <script>
     const clearBtn = document.querySelector('#clearBtn');
-    const commonOrigin = 'https://pedroping.github.io';
+    const commonOrigin = 'https://wonderful-mooncake-705915.netlify.app';
     const commonSite = document.querySelector('#commonSite').contentWindow;
 
     clearBtn.addEventListener('click', () => {
@@ -56,7 +56,7 @@
           if (event?.data?.type != 'token') return;
 
           if (event.data.invalid) {
-            window.location.href = 'https://wonderful-mooncake-705915.netlify.app/b?url=' + window.location.href;
+            window.location.href = 'https://pedroping.github.io/rotateCookies/b?url=' + window.location.href;
             return
           }
 
