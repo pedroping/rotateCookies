@@ -24,26 +24,34 @@
         const data = event.data;
 
         if (data.action == 'set') {
-          localStorage.setItem('token', data.token)
-          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.pedroping.github.io; Path=/`;
-
-          if (data.token)
+          if (!data.token) {
+            document.cookie = `myToken=; SameSite=None; Secure; Domain=.pedroping.github.io; Path=/`;
             event.source.postMessage(
-              'ok',
+              {
+                type: 'token',
+                token: null,
+                invalid: true
+              },
               origin,
             );
+            return;
+          }
+
+          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.pedroping.github.io; Path=/`;
+          event.source.postMessage(
+            'ok',
+            origin,
+          );
 
           return;
         }
 
         if (data.action == 'get') {
-          console.log(document.cookie, localStorage.getItem('token'));
-
           event.source.postMessage(
             {
               type: 'token',
-              token: (localStorage.getItem('token') || getCookie('myToken')),
-              invalid: !(localStorage.getItem('token') || getCookie('myToken'))
+              token: (getCookie('myToken')),
+              invalid: !(getCookie('myToken'))
             },
             origin,
           );

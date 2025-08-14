@@ -4,10 +4,23 @@
   <h1>site 1</h1>
   <br />
   <span id="token"></span>
+  <button id="clearBtn">Clear</button>
   <iframe id='commonSite' src='https://pedroping.github.io/rotateCookies/c/commonSite.html'
     style='display: none;'></iframe>
 
   <script>
+    const clearBtn = document.querySelector('#clearBtn');
+    const commonOrigin = 'https://pedroping.github.io';
+    const commonSite = document.querySelector('#commonSite').contentWindow;
+
+    clearBtn.addEventListener('click', () => {
+      commonSite.postMessage({
+        action: 'set',
+        token: null
+      }, commonOrigin);
+    })
+
+
     function getCookie(cname) {
       let name = cname + "=";
       let decodedCookie = decodeURIComponent(document.cookie);
@@ -30,7 +43,6 @@
       const commonOrigin = 'https://pedroping.github.io';
       const tokenSpan = document.querySelector("#token");
 
-
       const cookie = getCookie("myToken");
 
       if (cookie) {
@@ -38,15 +50,13 @@
         return;
       }
 
-
       window.addEventListener(
         "message",
         (event) => {
           if (event?.data?.type != 'token') return;
 
           if (event.data.invalid) {
-            if (confirm('Go?'))
-              window.location.href = 'https://wonderful-mooncake-705915.netlify.app/b?url=' + window.location.href;
+            window.location.href = 'https://wonderful-mooncake-705915.netlify.app/b?url=' + window.location.href;
             return
           }
 
@@ -66,5 +76,3 @@
 </body>
 
 </html>
-
-<!-- \"npx http-server ./a --port 9091\" -->
