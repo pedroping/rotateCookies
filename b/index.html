@@ -60,8 +60,7 @@
           if (event.data.wappalyzer) return;
           if (event.data !== 'ok') return;
 
-          if (confirm('Go?'))
-            window.location.href = lastUrl || 'https://rotatecookies.onrender.com/a'
+          window.location.href = lastUrl || 'https://rotatecookies.onrender.com/a';
         },
         false,
       );
