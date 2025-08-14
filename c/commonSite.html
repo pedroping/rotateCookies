@@ -9,7 +9,7 @@
 
         if (data.action == 'set') {
           localStorage.setItem('token', data.token)
-          document.cookie = `myToken=${data.token}; SameSite=None`;
+          document.cookie = `myToken=${data.token}; SameSite=None; Secure; Domain=.pedroping.github.io; Path=/`;
 
           if (data.token)
             event.source.postMessage(
